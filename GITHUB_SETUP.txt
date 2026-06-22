@@ -1,0 +1,137 @@
+# 📋 GITHUB & DEPLOYMENT INSTRUCTIONS
+
+## Step 1: Create GitHub Repository
+
+1. Go to https://github.com/new
+2. Fill in:
+   - **Repository name**: `finance-tracker`
+   - **Description**: Full-stack expense tracker with React, Express, MongoDB
+   - **Public** (recommended for portfolio)
+3. Click "Create repository"
+4. Copy the HTTPS URL (looks like: `https://github.com/YOUR_USERNAME/finance-tracker.git`)
+
+---
+
+## Step 2: Push Project to GitHub
+
+In PowerShell, run these commands:
+
+```powershell
+# Navigate to project
+cd C:\Users\blitz\finance-tracker
+
+# Add GitHub as remote (replace YOUR_USERNAME)
+git remote add origin https://github.com/YOUR_USERNAME/finance-tracker.git
+
+# Rename branch to main
+git branch -M main
+
+# Push to GitHub
+git push -u origin main
+```
+
+**Your repo is now live at**: `https://github.com/YOUR_USERNAME/finance-tracker`
+
+---
+
+## Step 3: Deploy Frontend (Easy - 5 minutes)
+
+### Deploy to Vercel (Recommended)
+
+1. **Install Vercel CLI**:
+   ```powershell
+   $env:Path = "C:\node-portable\node-v20.11.0-win-x64;$env:Path"
+   npm install -g vercel
+   ```
+
+2. **Deploy**:
+   ```powershell
+   cd C:\Users\blitz\finance-tracker\client
+   vercel --prod
+   ```
+
+3. **Follow the prompts**:
+   - Link to existing project? → **No**
+   - Project name → `finance-tracker`
+   - Use default settings for all other options
+
+4. **Your app is live at**: `https://finance-tracker.vercel.app` (or custom domain)
+
+**Frontend works in DEMO MODE** - all data stored locally in browser! ✅
+
+---
+
+## Step 4 (Optional): Deploy Backend
+
+### Deploy to Render (Free tier)
+
+1. Go to https://render.com
+2. Click "New +" → "Web Service"
+3. Connect your GitHub account and select `finance-tracker` repo
+4. Configure:
+   - **Name**: `finance-tracker-backend`
+   - **Environment**: Node
+   - **Build Command**: `cd server && npm install`
+   - **Start Command**: `cd server && npm start`
+   - **Instance Type**: Free
+
+5. Add Environment Variables:
+   ```
+   PORT=10000
+   MONGO_URI=mongodb+srv://user:password@cluster.mongodb.net/finance_tracker
+   JWT_SECRET=your_random_secret_key_32_chars_minimum
+   ```
+
+6. For MongoDB:
+   - Create free account at https://www.mongodb.com/cloud/atlas
+   - Create free cluster
+   - Get connection string and use as `MONGO_URI`
+
+---
+
+## Quick Summary
+
+✅ **GitHub**: Your code is on GitHub
+✅ **Frontend**: Live on Vercel (works without backend)
+⏳ **Backend**: Optional - deploy to Render when ready
+
+---
+
+## Share Your Project
+
+- **GitHub**: Share repo link with portfolio
+- **Live Demo**: Share Vercel URL
+- **Show it off**: Add to resume/LinkedIn
+
+---
+
+## Next Steps (Optional)
+
+1. **Add custom domain** to Vercel (Settings → Domains)
+2. **Set up MongoDB** for real data persistence
+3. **Deploy backend** to Render or Railway
+4. **Add login/signup** feature (currently in demo mode)
+
+---
+
+## Troubleshooting
+
+**Git remote already exists?**
+```powershell
+git remote remove origin
+git remote add origin https://github.com/YOUR_USERNAME/finance-tracker.git
+```
+
+**Vercel not found?**
+```powershell
+npm install -g vercel
+```
+
+**Need to reinstall node PATH?**
+```powershell
+$env:Path = "C:\node-portable\node-v20.11.0-win-x64;$env:Path"
+```
+
+---
+
+Good luck! 🚀
