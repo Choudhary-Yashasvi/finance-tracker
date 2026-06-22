@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: ft-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: finance_tracker
+
+  server:
+    build: ./server
+    container_name: ft-server
+    ports:
+      - '4000:4000'
+    environment:
+      PORT: 4000
+      MONGO_URI: mongodb://mongo:27017/finance_tracker
+      JWT_SECRET: your_jwt_secret_change_this
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+volumes:
+  mongo_data:
